@@ -2,6 +2,7 @@ package router
 
 import (
 	"CliPorto/internal/controller"
+	"CliPorto/internal/middleware"
 	"CliPorto/internal/repository"
 	"CliPorto/internal/service"
 	"database/sql"
@@ -10,6 +11,8 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine, db *sql.DB) {
+	r.Use(middleware.RateLimiter())
+
 	// Showcase routes
 	showcaseRepo := repository.NewShowcaseRepository(db)
 	showcaseService := service.NewShowcaseService(showcaseRepo)
