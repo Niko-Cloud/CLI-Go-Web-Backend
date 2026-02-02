@@ -40,6 +40,11 @@ func RegisterRoutes(r *gin.Engine, db *sql.DB) {
 	workService := service.NewWorkExperienceService(workRepo)
 	workController := controller.NewWorkExperienceController(workService)
 
+	// Command routes
+	commandRepo := repository.NewCommandRepository(db)
+	commandService := service.NewCommandService(commandRepo)
+	commandController := controller.NewCommandController(commandService)
+
 	api := r.Group("/api")
 	{
 		api.GET("/showcase", showcaseController.GetAll)
@@ -50,5 +55,7 @@ func RegisterRoutes(r *gin.Engine, db *sql.DB) {
 		api.GET("/education", educationController.GetAll)
 		api.GET("/work-experience", workController.GetAll)
 		api.GET("/work-experience/:id", workController.GetByID)
+		api.GET("/commands", commandController.GetAll)
+		api.GET("/commands/:name", commandController.GetByName)
 	}
 }
