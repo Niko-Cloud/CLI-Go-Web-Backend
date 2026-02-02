@@ -3,6 +3,7 @@ package service
 import (
 	"CliPorto/internal/domain"
 	"CliPorto/internal/repository"
+	"CliPorto/internal/utils"
 )
 
 type SkillService struct {
@@ -14,5 +15,9 @@ func NewSkillService(repo *repository.SkillRepository) *SkillService {
 }
 
 func (s *SkillService) GetAll() ([]domain.Skill, error) {
-	return s.repo.GetAll()
+	data, err := s.repo.GetAll()
+	if err != nil {
+		return nil, utils.NewBadRequest(err.Error())
+	}
+	return data, nil
 }

@@ -12,34 +12,42 @@ func (e *APIError) Error() string {
 	return e.Message
 }
 
-var (
-	ErrBadRequest = &APIError{
-		Status:  "BAD_REQUEST",
+func NewBadRequest(message string) *APIError {
+	return &APIError{
 		Code:    http.StatusBadRequest,
-		Message: "Bad request",
+		Status:  "BAD_REQUEST",
+		Message: message,
 	}
+}
 
-	ErrUnauthorized = &APIError{
-		Status:  "UNAUTHORIZED",
+func NewUnauthorized(message string) *APIError {
+	return &APIError{
 		Code:    http.StatusUnauthorized,
-		Message: "Unauthorized",
+		Status:  "UNAUTHORIZED",
+		Message: message,
 	}
+}
 
-	ErrForbidden = &APIError{
-		Status:  "FORBIDDEN",
+func NewForbidden(message string) *APIError {
+	return &APIError{
 		Code:    http.StatusForbidden,
-		Message: "Forbidden",
+		Status:  "FORBIDDEN",
+		Message: message,
 	}
+}
 
-	ErrNotFound = &APIError{
-		Status:  "NOT_FOUND",
+func NewNotFound(message string) *APIError {
+	return &APIError{
 		Code:    http.StatusNotFound,
-		Message: "Resource not found",
+		Status:  "NOT_FOUND",
+		Message: message,
 	}
+}
 
-	ErrInternal = &APIError{
-		Status:  "INTERNAL_SERVER_ERROR",
+func NewInternal(message string) *APIError {
+	return &APIError{
 		Code:    http.StatusInternalServerError,
-		Message: "Internal server error",
+		Status:  "INTERNAL_SERVER_ERROR",
+		Message: message,
 	}
-)
+}

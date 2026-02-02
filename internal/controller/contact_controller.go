@@ -18,7 +18,7 @@ func NewContactController(s *service.ContactService) *ContactController {
 func (c *ContactController) GetContactInfo(ctx *gin.Context) {
 	data, err := c.service.GetContactInfo()
 	if err != nil {
-		utils.JSONError(ctx, utils.ErrInternal)
+		utils.JSONError(ctx, err.(*utils.APIError))
 		return
 	}
 

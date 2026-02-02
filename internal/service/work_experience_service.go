@@ -6,15 +6,15 @@ import (
 	"CliPorto/internal/utils"
 )
 
-type ShowcaseService struct {
-	repo *repository.ShowcaseRepository
+type WorkExperienceService struct {
+	repo *repository.WorkExperienceRepository
 }
 
-func NewShowcaseService(repo *repository.ShowcaseRepository) *ShowcaseService {
-	return &ShowcaseService{repo: repo}
+func NewWorkExperienceService(r *repository.WorkExperienceRepository) *WorkExperienceService {
+	return &WorkExperienceService{repo: r}
 }
 
-func (s *ShowcaseService) GetAll() ([]domain.Showcase, error) {
+func (s *WorkExperienceService) GetAll() ([]domain.WorkExperience, error) {
 	data, err := s.repo.GetAll()
 	if err != nil {
 		return nil, utils.NewBadRequest(err.Error())
@@ -22,7 +22,7 @@ func (s *ShowcaseService) GetAll() ([]domain.Showcase, error) {
 	return data, nil
 }
 
-func (s *ShowcaseService) GetByID(id int) (*domain.Showcase, error) {
+func (s *WorkExperienceService) GetByID(id int) (*domain.WorkExperience, error) {
 	if id <= 0 {
 		return nil, utils.NewBadRequest("invalid ID")
 	}

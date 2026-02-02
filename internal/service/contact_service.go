@@ -3,6 +3,7 @@ package service
 import (
 	"CliPorto/internal/domain"
 	"CliPorto/internal/repository"
+	"CliPorto/internal/utils"
 )
 
 type ContactService struct {
@@ -14,5 +15,9 @@ func NewContactService(repo *repository.ContactRepository) *ContactService {
 }
 
 func (s *ContactService) GetContactInfo() ([]domain.Contact, error) {
-	return s.repo.GetContactInfo()
+	data, err := s.repo.GetContactInfo()
+	if err != nil {
+		return nil, utils.NewBadRequest(err.Error())
+	}
+	return data, nil
 }

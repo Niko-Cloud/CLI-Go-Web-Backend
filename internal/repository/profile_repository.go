@@ -2,9 +2,7 @@ package repository
 
 import (
 	"CliPorto/internal/domain"
-	"CliPorto/internal/utils"
 	"database/sql"
-	"errors"
 )
 
 type ProfileRepository struct {
@@ -50,13 +48,6 @@ func (r *ProfileRepository) GetLatest() ([]domain.Profile, error) {
 			return nil, err
 		}
 		results = append(results, p)
-	}
-
-	if err := rows.Err(); err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return nil, utils.ErrNotFound
-		}
-		return nil, err
 	}
 
 	return results, nil

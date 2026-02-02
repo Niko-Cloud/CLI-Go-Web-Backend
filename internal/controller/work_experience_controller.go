@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ShowcaseController struct {
-	service *service.ShowcaseService
+type WorkExperienceController struct {
+	service *service.WorkExperienceService
 }
 
-func NewShowcaseController(s *service.ShowcaseService) *ShowcaseController {
-	return &ShowcaseController{service: s}
+func NewWorkExperienceController(s *service.WorkExperienceService) *WorkExperienceController {
+	return &WorkExperienceController{service: s}
 }
 
-func (c *ShowcaseController) GetAll(ctx *gin.Context) {
+func (c *WorkExperienceController) GetAll(ctx *gin.Context) {
 	data, err := c.service.GetAll()
 	if err != nil {
 		utils.JSONError(ctx, err.(*utils.APIError))
@@ -27,7 +27,7 @@ func (c *ShowcaseController) GetAll(ctx *gin.Context) {
 	utils.JSONSuccess(ctx, http.StatusOK, data)
 }
 
-func (c *ShowcaseController) GetByID(ctx *gin.Context) {
+func (c *WorkExperienceController) GetByID(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		utils.JSONError(ctx, err.(*utils.APIError))

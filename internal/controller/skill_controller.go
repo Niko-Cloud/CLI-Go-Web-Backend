@@ -18,7 +18,7 @@ func NewSkillController(service *service.SkillService) *SkillController {
 func (c *SkillController) GetAllSkills(ctx *gin.Context) {
 	data, err := c.service.GetAll()
 	if err != nil {
-		utils.JSONError(ctx, utils.ErrInternal)
+		utils.JSONError(ctx, err.(*utils.APIError))
 		return
 	}
 

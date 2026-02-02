@@ -3,6 +3,7 @@ package repository
 import (
 	"CliPorto/internal/domain"
 	"database/sql"
+	"github.com/lib/pq"
 )
 
 type SkillRepository struct {
@@ -38,7 +39,7 @@ func (r *SkillRepository) GetAll() ([]domain.Skill, error) {
 			&s.ID,
 			&s.Name,
 			&s.Level,
-			&s.Category,
+			pq.Array(&s.Category),
 		); err != nil {
 			return nil, err
 		}
