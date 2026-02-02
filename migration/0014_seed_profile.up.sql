@@ -1,0 +1,3 @@
+INSERT INTO profile
+("name", "role", description, "location")
+VALUES('Indra Niko Saputra', 'Software Engineer', 'Software Engineer with experience building and maintaining microservice-based systems using Java Spring Boot and REST APIs in a corporate banking environment. Strong background in SQL databases (PostgreSQL, MySQL)and backend integration, with additional experience in Go and Android/Flutter development. Comfortableworking in Agile teams and adapting quickly to new technologies.', 'Klaten');
