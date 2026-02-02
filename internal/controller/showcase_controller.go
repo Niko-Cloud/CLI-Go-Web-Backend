@@ -2,6 +2,7 @@ package controller
 
 import (
 	"CliPorto/internal/service"
+	"CliPorto/internal/utils"
 	"net/http"
 	"strconv"
 
@@ -19,29 +20,25 @@ func NewShowcaseController(s *service.ShowcaseService) *ShowcaseController {
 func (c *ShowcaseController) GetAll(ctx *gin.Context) {
 	data, err := c.service.GetAll()
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		utils.JSONError(ctx, utils.ErrInternal)
 		return
 	}
-	ctx.JSON(http.StatusOK, data)
+
+	utils.JSONSuccess(ctx, http.StatusOK, data)
 }
 
 func (c *ShowcaseController) GetByID(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		utils.JSONError(ctx, utils.ErrBadRequest)
 		return
 	}
 
-	data, err := c.service.GetByID(id)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	data, apiErr := c.service.GetByID(id)
+	if apiErr != nil {
+		utils.JSONError(ctx, apiErr.(*utils.APIError))
 		return
 	}
 
-	if data == nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-		return
-	}
-
-	ctx.JSON(http.StatusOK, data)
+	utils.JSONSuccess(ctx, http.StatusOK, data)
 }

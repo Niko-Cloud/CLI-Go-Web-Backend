@@ -2,6 +2,7 @@ package repository
 
 import (
 	"CliPorto/internal/domain"
+	"CliPorto/internal/utils"
 	"database/sql"
 	"errors"
 	"github.com/lib/pq"
@@ -80,7 +81,7 @@ func (r *ShowcaseRepository) GetByID(id int) (*domain.Showcase, error) {
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, nil
+			return nil, utils.ErrNotFound
 		}
 		return nil, err
 	}
