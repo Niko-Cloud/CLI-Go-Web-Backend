@@ -20,10 +20,16 @@ func RegisterRoutes(r *gin.Engine, db *sql.DB) {
 	profileService := service.NewProfileService(profileRepo)
 	profileController := controller.NewProfileController(profileService)
 
+	// Contact routes
+	contactRepo := repository.NewContactRepository(db)
+	contactService := service.NewContactService(contactRepo)
+	contactController := controller.NewContactController(contactService)
+
 	api := r.Group("/api")
 	{
 		api.GET("/showcase", showcaseController.GetAll)
 		api.GET("/showcase/:id", showcaseController.GetByID)
 		api.GET("/profile", profileController.GetAll)
+		api.GET("/contact", contactController.GetContactInfo)
 	}
 }
