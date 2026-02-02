@@ -3,5 +3,5 @@ CREATE TABLE contact (
     type TEXT NOT NULL,
     value TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    created_at TIMESTAMP DEFAULT NOW()
+    updated_at TIMESTAMP DEFAULT NOW()
 );

@@ -6,5 +6,5 @@ CREATE TABLE work_experience (
     end_date DATE,
     description TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    created_at TIMESTAMP DEFAULT NOW()
+    updated_at TIMESTAMP DEFAULT NOW()
 );
