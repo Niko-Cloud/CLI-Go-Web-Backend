@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+database:
+  uri: postgres://root:root@localhost:5432/cli_web?sslmode=disable
