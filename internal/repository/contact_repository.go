@@ -2,9 +2,7 @@ package repository
 
 import (
 	"CliPorto/internal/domain"
-	"CliPorto/internal/utils"
 	"database/sql"
-	"errors"
 )
 
 type ContactRepository struct {
@@ -19,7 +17,7 @@ func (r *ContactRepository) GetContactInfo() ([]domain.Contact, error) {
 	const query = `
 		SELECT id, 
 		       "type", 
-		       value, 
+		       value
 		FROM contact
 		ORDER BY id
 		`
@@ -44,13 +42,6 @@ func (r *ContactRepository) GetContactInfo() ([]domain.Contact, error) {
 		}
 
 		results = append(results, c)
-	}
-
-	if err := rows.Err(); err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return nil, utils.ErrNotFound
-		}
-		return nil, err
 	}
 
 	return results, rows.Err()

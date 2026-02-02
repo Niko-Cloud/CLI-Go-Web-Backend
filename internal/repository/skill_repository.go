@@ -19,7 +19,7 @@ func (r *SkillRepository) GetAll() ([]domain.Skill, error) {
 			id,
 			name,
 			level,
-			category,
+			category
 		FROM skill
 		ORDER BY id ASC
 		`
