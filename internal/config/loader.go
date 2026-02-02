@@ -31,6 +31,13 @@ func Load() *Config {
 		log.Fatalf("failed to load config: %v", err)
 	}
 
+	for _, key := range v.AllKeys() {
+		val := v.GetString(key)
+		if strings.Contains(val, "${") {
+			v.Set(key, os.ExpandEnv(val))
+		}
+	}
+
 	cfg := &Config{}
 	if err := v.Unmarshal(cfg); err != nil {
 		log.Fatalf("failed to unmarshal config: %v", err)
