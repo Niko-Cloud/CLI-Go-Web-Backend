@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT}
 
 database:
   uri: ${DATABASE_URL}
